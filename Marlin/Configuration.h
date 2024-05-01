@@ -19,6 +19,75 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
+
+/*
+Send: M503
+; Linear Units:
+G21 ; (mm)
+; Temperature Units:
+M149 C ; Units in Celsius
+; Filament settings (Disabled):
+M200 S0 D1.7500
+; Steps per unit:
+M92 X80.0000 Y80.0000 Z400.0000 E145.0000
+; Max feedrates (units/s):
+M203 X500.0000 Y500.0000 Z5.0000 E25.0000
+; Max Acceleration (units/s2):
+M201 X1000.0000 Y1000.0000 Z100.0000 E5000.0000
+; Acceleration (units/s2) (P<print-accel> R<retract-accel> T<travel-accel>):
+M204 P500.0000 R500.0000 T500.0000
+; Advanced (B<min_segment_time_us> S<min_feedrate> T<min_travel_feedrate> J<junc_dev>):
+M205 B20000.0000 S0.0000 T0.0000 J0.0800
+; Home offset:
+M206 X0.0000 Y0.0000 Z0.0000
+; Auto Bed Leveling:
+M420 S0 Z10.0000 ; Leveling OFF
+G29 W I0 J0 Z-0.30450
+G29 W I1 J0 Z-0.22400
+G29 W I2 J0 Z-0.18650
+G29 W I3 J0 Z-0.33650
+G29 W I4 J0 Z-0.63150
+G29 W I0 J1 Z-0.27450
+G29 W I1 J1 Z-0.16000
+G29 W I2 J1 Z-0.09600
+G29 W I3 J1 Z-0.23850
+G29 W I4 J1 Z-0.54850
+G29 W I0 J2 Z-0.24350
+G29 W I1 J2 Z-0.07750
+G29 W I2 J2 Z-0.03550
+G29 W I3 J2 Z-0.18550
+G29 W I4 J2 Z-0.53900
+G29 W I0 J3 Z-0.23700
+G29 W I1 J3 Z-0.10150
+G29 W I2 J3 Z-0.04250
+G29 W I3 J3 Z-0.19750
+G29 W I4 J3 Z-0.51150
+G29 W I0 J4 Z-0.21950
+G29 W I1 J4 Z-0.09450
+G29 W I2 J4 Z-0.06900
+G29 W I3 J4 Z-0.20700
+G29 W I4 J4 Z-0.52200
+; Material heatup parameters:
+M145 S0 H190.0000 B65.0000 F0
+M145 S1 H235.0000 B80.0000 F0
+M145 S2 H240.0000 B110.0000 F0
+; Hotend PID:
+M301 P23.3400 I1.8500 D73.5500
+; Bed PID:
+M304 P100.6500 I14.8200 D455.6900
+; Z-Probe Offset:
+M851 X-1.5000 Y-34.0000 Z-0.9000 ; (mm)
+; Stepper driver current:
+M906 X800 Y800 Z800
+M906 T0 E950
+
+; Driver stepping mode:
+M569 S1 X Y Z
+M569 S1 T0 E
+; Filament load/unload:
+M603 L350.0000 U450.0000 ; (mm)
+*/
+
 #pragma once
 
 #define CONFIG_EXAMPLES_DIR "BIQU/B1"
@@ -1606,8 +1675,10 @@
  *     | 4         | T <-- Example "4" ( left-, front-)
  *     |    [-]    |
  *     O-- FRONT --+
+; Z-Probe Offset:
+M851 X-1.5000 Y-34.0000 Z-0.9000 ; (mm)
  */
-#define NOZZLE_TO_PROBE_OFFSET { 24, -47, -1.5 }
+#define NOZZLE_TO_PROBE_OFFSET { -1.5, -34, -0.9 }
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 #define PROBING_TOOL 0
